@@ -11,7 +11,7 @@ pos = find(y == 1); neg = find(y == 0);
 % plot(x(pos, 2), x(pos,3), '+'); hold on
 % plot(x(neg, 2), x(neg, 3), 'o')
 
-g = inline('1.0 ./ (1.0 + exp(-z))'); 
+g = @(z) 1.0 ./ (1.0 + exp(-z));
 % Usage: To find the value of the sigmoid 
 % evaluated at 2, call g(2)
 
