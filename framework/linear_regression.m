@@ -1,7 +1,7 @@
 m = 1000;
 n = 20;
 iterations = 300;
-theta_true = rand(n, 1);
+% theta_true = rand(n, 1);
 
 % A = randn(m, n);
 alpha = 1e-5;
@@ -17,25 +17,8 @@ theta_opt = A\y;
 % residue = y - A*theta_opt;
 loss_min = norm(theta_opt - theta_true);
 
-
-theta = zeros(n, 1);
-gd_error = zeros(iterations, 1);
-for iter = 1:iterations
-   theta = theta - alpha*2*A'*(A*theta - y);
-   gd_error(iter) = norm(theta - theta_true);
-end
-gd_eps = norm(eps(theta));
-
-
-theta = zeros(n, 1);
-sgd_error = zeros(iterations, 1);
-
-for iter = 1:iterations*m
-    rInd = randi(m);
-    theta = theta - alpha*2*A(rInd, :)'*(A(rInd, :)*theta - y(rInd));
-    sgd_error(iter) = norm(theta - theta_true);
-end
-sgd_eps = norm(eps(theta));
+[gd_loss, gd_error, gd_eps, sgd_loss, sgd_error, sgd_eps, opt_loss] ...
+    = run_linear_regression(A, y, alpha);
 
 clf
 semilogy(1:iterations, gd_error, (1:iterations*m)/m, sgd_error)
