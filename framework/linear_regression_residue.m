@@ -1,9 +1,10 @@
 m = 1000;
-n = 20;
+n = 25;
 alpha = 1e-5;
 runs = 1000;
+iterations = 300;
 
-residue_sqnorms = zeros(runs, 1);
+residue_norms = zeros(runs, 1);
 gd_errors = zeros(runs, 1);
 sgd_errors = zeros(runs, 1);
 
@@ -16,22 +17,35 @@ for i = 1:runs
     residue_direction = randn(m-n, 1);
     residue_direction = residue_direction / norm(residue_direction);
     residue = null(A')*residue_direction*rand()*1000;
-    residue_sqnorms(i) = norm(residue)^2;
+    residue_norms(i) = norm(residue);
     
     y = A*theta_true + residue;
-    [~, gd_error, ~, ~, sgd_error, ~, ~] = run_linear_regression(A, y, alpha);
+    [~, gd_error, ~, ~, sgd_error, ~, ~] = run_linear_regression(A, y, alpha, iterations);
     gd_errors(i) = gd_error(end); % take just the last error
     sgd_errors(i) = sgd_error(end); % take just the last error
     
     % Admin stuff
     display(['Completed ' num2str(i) ' out of ' num2str(runs)])
-    save data.mat
+    save('data.mat', 'residue_norms', 'gd_errors', 'sgd_errors')
 end
 
+%% Generate a plot
+fig1 = figure(1);
 clf
-subplot(1, 2, 1)
-plot(residue_sqnorms, gd_errors, '+')
-title('Gradient descent')
-subplot(1, 2, 2)
-plot(residue_sqnorms, sgd_errors, '+')
-title('Stochastic gradient descent')
+plot(residue_norms, gd_errors, '+')
+title(['Gradient descent (m = ' num2str(m) ', n = ' num2str(n) ')'])
+xlabel('||residue||')
+ylabel(['|| \theta^{(' num2str(iterations) ')} - \theta_{opt} ||'])
+savefig(fig1, 'residues_gd', 'compact')
+saveas(fig1, 'residues_gd.eps')
+saveas(fig1, 'residues_gd.png')
+
+fig2 = figure(2);
+clf
+plot(residue_norms, sgd_errors, '+')
+title(['Stochastic gradient descent (m = ' num2str(m) ', n = ' num2str(n) ')'])
+xlabel('||residue||')
+ylabel(['|| \theta^{(' num2str(iterations) ')} - \theta_{opt} ||'])
+savefig(fig2, 'residues_sgd', 'compact')
+saveas(fig2, 'residues_sgd.eps')
+saveas(fig2, 'residues_sgd.png')
