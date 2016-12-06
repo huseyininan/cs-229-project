@@ -25,7 +25,7 @@ for i = 1:runs
     sgd_errors(i) = sgd_error(end); % take just the last error
     
     % Admin stuff
-    display(['Completed ' num2str(i) ' out of ' num2str(runs)])
+    fprintf('Completed %d out of %d runs\r', i, runs)
     save('data.mat', 'residue_norms', 'gd_errors', 'sgd_errors')
 end
 
@@ -33,9 +33,9 @@ end
 fig1 = figure(1);
 clf
 plot(residue_norms, gd_errors, '+')
-title(['Gradient descent (m = ' num2str(m) ', n = ' num2str(n) ')'])
+title(sprintf('Gradient descent (m = %d, n = %d)', m, n))
 xlabel('||residue||')
-ylabel(['|| \theta^{(' num2str(iterations) ')} - \theta_{opt} ||'])
+ylabel(sprintf('|| \theta^{(%d)} - \theta_{opt} ||', iterations))
 savefig(fig1, 'residues_gd', 'compact')
 saveas(fig1, 'residues_gd.eps')
 saveas(fig1, 'residues_gd.png')
@@ -43,9 +43,9 @@ saveas(fig1, 'residues_gd.png')
 fig2 = figure(2);
 clf
 plot(residue_norms, sgd_errors, '+')
-title(['Stochastic gradient descent (m = ' num2str(m) ', n = ' num2str(n) ')'])
+title(sprintf('Stochastic gradient descent (m = %d, n = %d)', m, n))
 xlabel('||residue||')
-ylabel(['|| \theta^{(' num2str(iterations) ')} - \theta_{opt} ||'])
+ylabel(sprintf('|| \theta^{(%d)} - \theta_{opt} ||', iterations))
 savefig(fig2, 'residues_sgd', 'compact')
 saveas(fig2, 'residues_sgd.eps')
 saveas(fig2, 'residues_sgd.png')
