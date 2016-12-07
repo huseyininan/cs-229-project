@@ -32,20 +32,20 @@ end
 %% Generate a plot
 fig1 = figure(1);
 clf
-plot(residue_norms, gd_errors, '+')
+plot(residue_norms.^2, gd_errors.^2, '+')
 title(sprintf('Gradient descent (m = %d, n = %d)', m, n))
-xlabel('||residue||')
-ylabel(sprintf('|| \theta^{(%d)} - \theta_{opt} ||', iterations))
+xlabel('||residue||^2')
+ylabel(sprintf('|| \theta^{(%d)} - \theta_{opt} ||^2', iterations))
 savefig(fig1, 'residues_gd', 'compact')
 saveas(fig1, 'residues_gd.eps')
 saveas(fig1, 'residues_gd.png')
 
 fig2 = figure(2);
 clf
-plot(residue_norms, sgd_errors, '+')
+plot(residue_norms.^2, sgd_errors.^2, '+')
 title(sprintf('Stochastic gradient descent (m = %d, n = %d)', m, n))
-xlabel('||residue||')
-ylabel(sprintf('|| \theta^{(%d)} - \theta_{opt} ||', iterations))
+xlabel('||residue||^2')
+ylabel(sprintf('|| \theta^{(%d)} - \theta_{opt} ||^2', iterations))
 savefig(fig2, 'residues_sgd', 'compact')
 saveas(fig2, 'residues_sgd.eps')
 saveas(fig2, 'residues_sgd.png')
