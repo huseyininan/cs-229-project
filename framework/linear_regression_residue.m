@@ -16,7 +16,7 @@ for i = 1:runs
     % Pick a residue in a random direction, orthogonal to range(A).
     residue_direction = randn(m-n, 1);
     residue_direction = residue_direction / norm(residue_direction);
-    residue = null(A')*residue_direction*rand()*1000;
+    residue = null(A')*residue_direction*sqrt(rand())*1000;
     residue_norms(i) = norm(residue);
     
     y = A*theta_true + residue;
