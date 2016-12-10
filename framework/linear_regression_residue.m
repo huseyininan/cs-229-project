@@ -32,7 +32,7 @@ for c = cs
 
             % Admin stuff
             fprintf('Completed %d out of %d runs\r', i, runs)
-            save('data.mat', 'residue_norms', 'gd_errors', 'sgd_errors')
+            save('data_backup.mat', 'm', 'n', 'mu', 'iterations', 'residue_norms', 'gd_errors', 'sgd_errors')
         end
 
         %% Generate a plot
