@@ -1,7 +1,7 @@
 m = 1000;
 n = 25;
-alpha = 1e-5;
-runs = 1000;
+mu = 1e-5;
+runs = 10;
 iterations = 300;
 
 residue_norms = zeros(runs, 1);
@@ -20,7 +20,7 @@ for i = 1:runs
     residue_norms(i) = norm(residue);
     
     y = A*theta_true + residue;
-    [~, gd_error, ~, ~, sgd_error, ~, ~] = run_linear_regression(A, y, alpha, iterations);
+    [~, gd_error, ~, ~, sgd_error, ~, ~] = run_linear_regression(A, y, mu, iterations);
     gd_errors(i) = gd_error(end); % take just the last error
     sgd_errors(i) = sgd_error(end); % take just the last error
     
