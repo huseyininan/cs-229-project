@@ -1,6 +1,6 @@
 cs = [10 30 100];
 ns = [10 30 100];
-runs = 700;
+runs = 200;
 iterations = 300;
 
 for c = cs
