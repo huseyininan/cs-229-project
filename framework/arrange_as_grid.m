@@ -1,4 +1,6 @@
-source_dir = '../../../Dropbox/CS 229 Plots/grid-2/plots';
+% Replace this variable with the appropriate directory
+source_dir = '../../../Dropbox/CS 229 Plots/grid-5-very-high-mu/plots';
+
 dest_fig = figure;
 ms = [100 300 1000];
 ns = [10 30 100];
@@ -11,7 +13,7 @@ for i = 1:numel(ms)
         m = ms(i);
         n = ns(j);
         c = m/n;
-        mu = 3e-3/n;
+        mu = 1e-2/n;
         
         % Code taken from
         % https://www.mathworks.com/matlabcentral/answers/101806-how-can-i-insert-my-matlab-figure-fig-files-into-multiple-subplots
