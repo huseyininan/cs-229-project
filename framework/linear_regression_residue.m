@@ -1,5 +1,5 @@
-ms = [80 120 150 200];
-ns = [10 30 100];
+ms = [100 300 1000];
+ns = [10 30];
 runs = 10;
 iterations = 300;
 M = numel(ms);
@@ -13,7 +13,7 @@ for n = ns
     for j = 1:M
         m = ms(j);
         c = m/n;
-        mu = 1e-3/n;
+        mu = 3e-3/n;
 
         fprintf('Started c=%d, m=%d, n=%d, mu=%.0e at %s\n', c, m, n, mu, datestr(now))
 
