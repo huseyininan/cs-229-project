@@ -1,13 +1,14 @@
-cs = [10 30 100];
+ms = [100 300 1000];
 ns = [10 30 100];
 runs = 200;
 iterations = 300;
 
-for c = cs
+for m = ms
     for n = ns
-        m = c*n;
-        mu = 3e-3/n;
-        
+        % m = c*n;
+        c = m/n;
+        mu = 1e-1/n;
+
         fprintf('Started c=%d, m=%d, n=%d, mu=%.0e at %s\n', c, m, n, mu, datestr(now))
 
         residue_norms = zeros(runs, 1);
@@ -37,6 +38,9 @@ for c = cs
 
         %% Generate a plot
         plot_residue
-        
+
     end
 end
+
+fprintf('Finished at %s\n', datestr(now))
+
